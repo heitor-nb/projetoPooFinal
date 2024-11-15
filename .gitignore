@@ -54,3 +54,4 @@ desktop.ini
 *.out
 *.test
 coverage/
+/bin/
