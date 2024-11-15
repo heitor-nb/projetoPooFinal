@@ -26,7 +26,8 @@ public class RepositorioCarros implements IRepositorioCarros{
 	
 	@Override
 	public void Adicionar(Carro carro) {
-		lista.add(carro);	
+		var index = Indice(carro.getPlaca());
+		if(index == -1) lista.add(carro);
 	}
 
 	@Override
@@ -47,7 +48,7 @@ public class RepositorioCarros implements IRepositorioCarros{
 			var aux = lista.get(index);
 			aux.setName(carro.getName());
 			aux.setValue(carro.getValue());
-			aux.setPlaca(carro.getPlaca());
+			// aux.setPlaca(carro.getPlaca());
 			aux.setModelo(carro.getModelo());
 			aux.setAutomatico(carro.getAutomatico());
 		}

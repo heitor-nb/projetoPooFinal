@@ -21,7 +21,7 @@ public class Cliente {
     public void setCPF(String CPF) {
         this.CPF = CPF;
     }
-    public String getCPF(String CPF) {
+    public String getCPF() {
         return this.CPF;
     }
 
