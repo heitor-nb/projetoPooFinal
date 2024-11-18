@@ -3,6 +3,7 @@ package projetoPoo.Repositorios;
 import java.util.ArrayList;
 
 import projetoPoo.Interfaces.IRepositorioCarros;
+import projetoPoo.enums.TipoDeCarro;
 import projetoPoo.modelos.Carro;
 
 public class RepositorioCarros implements IRepositorioCarros{
@@ -33,6 +34,16 @@ public class RepositorioCarros implements IRepositorioCarros{
 	@Override
 	public ArrayList<Carro> Listar() {
 		return lista;
+	}
+	
+	@Override
+	public ArrayList<Carro> ListarPorTipo(TipoDeCarro tipo) {
+		var aux = new ArrayList<Carro>();
+		for(int i = 0; i < lista.size(); i++) {
+			var carro = lista.get(i);
+			if(carro.getTipo().equals(tipo) && carro.isDisponivel()) aux.add(carro);
+		}
+		return aux;
 	}
 
 	@Override

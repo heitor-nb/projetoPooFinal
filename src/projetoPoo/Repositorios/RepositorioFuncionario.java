@@ -40,6 +40,18 @@ public class RepositorioFuncionario implements IRepositorioFuncionario {
 		var index = Indice(cpf);
 		return index > -1 ? lista.get(index) : null;
 	}
+	
+	@Override
+	public Funcionario ProcurarPorNome(String nome) {
+		var index = -1;
+		for(int i = 0; i < lista.size(); i++) {
+			if(lista.get(i).getName().equals(nome)) {
+				index = i;
+				break;
+			}
+		}
+		return index > -1 ? lista.get(index) : null;
+	}
 
 	@Override
 	public void Atualizar(Funcionario funcionario) {

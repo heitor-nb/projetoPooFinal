@@ -34,6 +34,24 @@ public class RepositorioAluguel implements IRepositorioAluguel{
 	public ArrayList<Aluguel> Listar() {
 		return lista;
 	}
+	
+	// add ao IRepos
+	public ArrayList<Aluguel> ListarAtivos(){
+		var aux = new ArrayList<Aluguel>();
+		for(int i = 0; i < lista.size(); i++) {
+			if(!lista.get(i).getDue()) aux.add(lista.get(i));
+		}
+		return aux;
+	}
+	
+	// add ao IRepos
+	public ArrayList<Aluguel> ListarDevolvidos(){
+		var aux = new ArrayList<Aluguel>();
+		for(int i = 0; i < lista.size(); i++) {
+			if(lista.get(i).getDue()) aux.add(lista.get(i));
+		}
+		return aux;
+	}
 
 	@Override
 	public Aluguel procurarPorId(String id) {

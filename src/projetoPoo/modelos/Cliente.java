@@ -5,10 +5,10 @@ public class Cliente {
 	private String name;
 	private boolean alugou;
 	
-	Cliente(String name,String CPF,boolean alugou) {
+	public Cliente(String name,String CPF) {
 		this.name = name;
 		this.CPF = CPF;
-		this.alugou = alugou;
+		this.alugou = false;
 	}
 
 	public void setName(String name) {

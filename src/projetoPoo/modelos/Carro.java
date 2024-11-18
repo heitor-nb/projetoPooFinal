@@ -1,6 +1,11 @@
 package projetoPoo.modelos;
 
-public class Carro {
+import projetoPoo.enums.TipoDeCarro;
+
+public abstract class Carro {
+	
+	protected TipoDeCarro tipo;
+	private boolean disponivel;
 	private String name;
 	private double value;
 	private String placa;
@@ -13,6 +18,7 @@ public class Carro {
 		this.placa = placa;
 		this.modelo = modelo;
 		this.automatico = automatico;
+		disponivel = true;
 	}
 
 	public void setName(String name) {
@@ -50,6 +56,28 @@ public class Carro {
 	}
 	public boolean getAutomatico() {
 		return this.automatico;
+	}
+
+	public TipoDeCarro getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoDeCarro tipo) {
+		this.tipo = tipo;
+	}
+
+	public boolean isDisponivel() {
+		return disponivel;
+	}
+
+	public void setDisponivel(boolean disponivel) {
+		this.disponivel = disponivel;
+	}
+	
+	public void ExibirDetalhes() {
+		System.out.println("Nome: " + name + "\nPlaca: " + placa + "\nModelo: " + modelo +
+				"\nAutomático: " + automatico + "\n*Disponível: " + disponivel +
+				"\n*Tipo: " + tipo + "\nDiária: " + value);
 	}
 	
 }

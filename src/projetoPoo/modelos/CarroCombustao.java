@@ -5,22 +5,14 @@ import projetoPoo.enums.TipoDeCombustivel;
 
 public class CarroCombustao extends Carro {
 	
-	private TipoDeCarro tipo;
 	private TipoDeCombustivel combustivel;
 	private int tanque;
 	
-	CarroCombustao (String name,Double value,String placa,String modelo,Boolean automatico,TipoDeCombustivel combustivel,int tanque) {
+	public CarroCombustao(String name,Double value,String placa,String modelo,Boolean automatico,TipoDeCombustivel combustivel,int tanque) {
 		super(name,value,placa,modelo,automatico);
 		this.tipo = TipoDeCarro.Combustao;
 		this.combustivel = combustivel;
 		this.tanque = tanque;
-	}
-
-	public String getTipo() {
-		return this.tipo.name();
-	}
-	public void setTipo(TipoDeCarro tipo) {
-		this.tipo = tipo;
 	}
 
 	public String getCombustivel() {

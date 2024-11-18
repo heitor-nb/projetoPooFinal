@@ -4,11 +4,12 @@ public class Aluguel {
     private String ID; 
 	private Carro carro;
 	private Cliente cliente;
+	private Funcionario funcionario;
     private int time;
     private double finalPrice;
     private boolean due;
 	
-	Aluguel(String ID,Carro carro,Cliente cliente,int time,double finalPrice,boolean due) {
+	public Aluguel(String ID,Carro carro,Cliente cliente,Funcionario funcionario,int time,double finalPrice,boolean due) {
 		this.ID = ID;
         this.carro = carro;
         this.cliente = cliente;
@@ -54,5 +55,15 @@ public class Aluguel {
     public double getFinalPrice() {
         return this.finalPrice ;
     }
+
+    // Adicionar à interface:
+    
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
 	
 }

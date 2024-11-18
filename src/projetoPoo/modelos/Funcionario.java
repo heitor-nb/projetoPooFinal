@@ -5,7 +5,7 @@ public class Funcionario {
 	private String name;
 	private String senha;
 	
-	Funcionario(String name, String CPF, String senha) {
+	public Funcionario(String name, String CPF, String senha) {
 		this.name = name;
 		this.CPF = CPF;
 		this.senha = senha;
@@ -31,5 +31,8 @@ public class Funcionario {
     public String getSenha() {
         return this.senha;
     }
-
+    
+    public void ExibirDetalhes() {
+    	System.out.println("CPF: " + CPF + "\nNome:" + name);
+    }
 }
