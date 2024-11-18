@@ -36,7 +36,7 @@ public class RepositorioClientes implements IRepositorioClientes {
 	}
 
 	@Override
-	public Cliente RecuperarPlaca(String cpf) {
+	public Cliente procurarPorCPF(String cpf) {
 		var index = Indice(cpf);
 		return index > -1 ? lista.get(index) : null;
 	}

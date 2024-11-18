@@ -6,7 +6,7 @@ import projetoPoo.modelos.Cliente;
 public interface IRepositorioClientes {
 	void Adicionar(Cliente cliente);
 	ArrayList<Cliente> Listar();
-	Cliente RecuperarPlaca(String cpf);
+	Cliente procurarPorCPF(String cpf);
 	void Atualizar(Cliente cliente);
 	void Remover(String cpf);
 }
