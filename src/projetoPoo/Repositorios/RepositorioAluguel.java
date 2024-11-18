@@ -35,7 +35,6 @@ public class RepositorioAluguel implements IRepositorioAluguel{
 		return lista;
 	}
 	
-	// add ao IRepos
 	public ArrayList<Aluguel> ListarAtivos(){
 		var aux = new ArrayList<Aluguel>();
 		for(int i = 0; i < lista.size(); i++) {
@@ -44,7 +43,6 @@ public class RepositorioAluguel implements IRepositorioAluguel{
 		return aux;
 	}
 	
-	// add ao IRepos
 	public ArrayList<Aluguel> ListarDevolvidos(){
 		var aux = new ArrayList<Aluguel>();
 		for(int i = 0; i < lista.size(); i++) {
@@ -70,7 +68,6 @@ public class RepositorioAluguel implements IRepositorioAluguel{
 			aux.setFinalPrice(aluguel.getFinalPrice());
 			aux.setTime(aluguel.getTime());
 		}
-		// else System.out.println("Não encontrado");
 	}
 
 	@Override

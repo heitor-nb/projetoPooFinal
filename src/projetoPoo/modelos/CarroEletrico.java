@@ -7,8 +7,8 @@ public class CarroEletrico extends Carro{
 	private TipoDeTomada tomada;
 	private int bateria;
 	
-	public CarroEletrico(String name,Double value,String placa,String modelo,Boolean automatico,TipoDeTomada tomada,int bateria) {
-		super(name,value,placa,modelo,automatico);
+	public CarroEletrico(String name,Double value,String placa,String modelo,Boolean automatico,TipoDeTomada tomada,int bateria,String marca) {
+		super(name,value,placa,modelo,automatico,marca);
 		this.tipo = TipoDeCarro.Elétrico;
 		this.tomada = tomada;
 		this.bateria = bateria;

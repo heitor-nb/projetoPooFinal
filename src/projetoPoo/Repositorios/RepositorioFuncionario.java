@@ -26,7 +26,7 @@ public class RepositorioFuncionario implements IRepositorioFuncionario {
 
 	@Override
 	public void Adicionar(Funcionario funcionario) {
-		var index = Indice(funcionario.getCPF()); // Fazer essa verificacao em repos carros
+		var index = Indice(funcionario.getCPF());
 		if(index == -1) lista.add(funcionario);
 	}
 

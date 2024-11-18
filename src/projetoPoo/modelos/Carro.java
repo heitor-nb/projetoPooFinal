@@ -11,12 +11,14 @@ public abstract class Carro {
 	private String placa;
 	private String modelo;
 	private Boolean automatico;
+	private String marca;
 	
-	Carro(String name,Double value,String placa,String modelo,Boolean automatico) {
+	Carro(String name,Double value,String placa,String modelo,Boolean automatico,String marca) {
 		this.name = name;
 		this.value = value;
 		this.placa = placa;
 		this.modelo = modelo;
+		this.marca = marca;
 		this.automatico = automatico;
 		disponivel = true;
 	}
@@ -73,9 +75,15 @@ public abstract class Carro {
 	public void setDisponivel(boolean disponivel) {
 		this.disponivel = disponivel;
 	}
-	
+	public String getMarca() {
+		return this.marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
 	public void ExibirDetalhes() {
-		System.out.println("Nome: " + name + "\nPlaca: " + placa + "\nModelo: " + modelo +
+		System.out.println("Nome: " + name + "\nPlaca: " + placa +"\nMarca:"+marca+ "\nModelo: " + modelo +
 				"\nAutomático: " + automatico + "\n*Disponível: " + disponivel +
 				"\n*Tipo: " + tipo + "\nDiária: " + value);
 	}

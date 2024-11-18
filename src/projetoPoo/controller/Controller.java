@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import projetoPoo.modelos.Locadora;
 
-public class Controller{ // Tratar erros
+public class Controller{ 
 
 	private Locadora locadora;
 	private MenuFuncionario menuFuncionario;
@@ -14,7 +14,7 @@ public class Controller{ // Tratar erros
 		menuFuncionario = new MenuFuncionario(locadora);
 	}
 	
-	public void MenuInicial() { // *
+	public void MenuInicial() { 
 		try {
 			System.out.println("Locadora do tigrinho.\n");
 			var scanner = new Scanner(System.in);

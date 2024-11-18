@@ -56,8 +56,6 @@ public class Aluguel {
         return this.finalPrice ;
     }
 
-    // Adicionar à interface:
-    
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}

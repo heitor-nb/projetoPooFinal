@@ -32,7 +32,7 @@ public class MenuFuncionario implements IMenu{
 		
 		try {
 			do option = scanner.nextInt();
-			while(option < 0 || option > 9);
+			while(option < 0 || option > 10);
 		}
 		catch(Exception ex) { // ?
 			System.out.println(ex);
@@ -66,6 +66,9 @@ public class MenuFuncionario implements IMenu{
 		case 9:
 			ListarCarros();
 			break;
+		case 10:
+			ListarClientes();
+			break;
 		case 0:
 			option = -1;
 			break;
@@ -77,7 +80,6 @@ public class MenuFuncionario implements IMenu{
 	
 	private void RegistrarLocacao(Funcionario funcionario) {
 		
-		// Considerar usar um único bloco try-catch
 		
 		var tipos = TipoDeCarro.values();
 		var scanner = new Scanner(System.in);
@@ -95,12 +97,22 @@ public class MenuFuncionario implements IMenu{
 			System.out.println(ex);
 			return;
 		}
+		
 		var lista = locadora.reposCarros.ListarPorTipo(tipos[option]);
+		
+		if(lista.size() == 0) {
+			System.out.println("Nenhum carro disponivel.");
+			System.out.println("Redirecionando para tela principal...\n(press enter)");
+			scanner.nextLine();
+			return;
+		}
+		
 		for(int i = 0; i < lista.size(); i++) {
 			var carro = lista.get(i);
 			System.out.println(i + ". " + carro.getName() + " - " + carro.getPlaca() +
 					" - Diária: R$" + carro.getValue());
 		}
+		
 		System.out.println("Digite a opção:");
 		option = -1;
 		try {
@@ -114,9 +126,16 @@ public class MenuFuncionario implements IMenu{
 		var carro = lista.get(option);
 		System.out.println("Carro:");
 		carro.ExibirDetalhes();
+		if(locadora.reposClientes.Listar().size() == 0) {
+			System.out.println("Nenhum Cliente cadastrado.");
+			System.out.println("Redirecionando para tela de cadastro...\n(press enter)");
+			scanner.nextLine();
+			CadastrarCliente();
+		}
 		System.out.println("----- Cliente -----");
 		System.out.println("Digite o CPF:");
 		Cliente cliente = null;
+		
 		try {
 			var cpf = scanner.next(); // *
 			cliente = locadora.reposClientes.procurarPorCPF(cpf);
@@ -128,7 +147,7 @@ public class MenuFuncionario implements IMenu{
 		if(cliente == null) {
 			System.out.println("Cliente não cadastrado.");
 			System.out.println("Redirecionando para tela de cadastro...\n(press enter)");
-			scanner.next();
+			scanner.nextLine();
 			CadastrarCliente();
 		}
 		else {
@@ -162,13 +181,14 @@ public class MenuFuncionario implements IMenu{
 				var id = String.valueOf(locadora.reposAlugueis.Listar().size());
 				var aluguel = new Aluguel(id, carro,
 						cliente, funcionario, diarias, diarias*carro.getValue(), false);
+				carro.setDisponivel(false);
 				locadora.reposAlugueis.Adicionar(aluguel);
 				System.out.println("Aluguel adicionado.\nId: " + id);
 			}
 		}
 	}
 	
-	private void RegistrarDevolucao() { // Verificar identidade do cliente.
+	private void RegistrarDevolucao() { 
 		System.out.println("Placa:");
 		var scanner = new Scanner(System.in);
 		String placa;
@@ -189,6 +209,7 @@ public class MenuFuncionario implements IMenu{
 		}
 		if(index > -1) {
 			lista.get(index).setDue(true);
+			lista.get(index).getCarro().setDisponivel(true);
 			System.out.println("Devolvido.\nId: " + lista.get(index).getID());
 		}
 		else System.out.println("Nenhum aluguel ativo com essa placa.");
@@ -213,6 +234,8 @@ public class MenuFuncionario implements IMenu{
 			var placa = scanner.next();
 			System.out.println("Modelo:");
 			var modelo = scanner.next();
+			System.out.println("Marca:");
+			var marca = scanner.next();
 			System.out.println("Automático? (0 - Não/ 1 - Sim)");
 			int automatico;
 			do automatico = scanner.nextInt();
@@ -223,14 +246,14 @@ public class MenuFuncionario implements IMenu{
 			switch(tipo) {
 			case Híbrido:
 				carro = new CarroHibrido(nome, diaria, placa, modelo,
-						automatico == 0 ? false : true);
+						automatico == 0 ? false : true, marca);
 				break;
 			case Combustao:
 				var combustiveis = TipoDeCombustivel.values();
 				System.out.println("Tipo de combústivel:");
 				for(int i = 0; i < combustiveis.length; i++) {
 					System.out.println(i + " - " + combustiveis[i]);
-				}
+				}				
 				System.out.println("Digite a opção:");
 				do option = scanner.nextInt();
 				while(option < 0 || option >= tipos.length);
@@ -238,7 +261,7 @@ public class MenuFuncionario implements IMenu{
 				System.out.println("Tanque:");
 				var tanque = scanner.nextInt();
 				carro = new CarroCombustao(nome, diaria, placa, modelo,
-						automatico == 0 ? false : true, combustivel, tanque);
+						automatico == 0 ? false : true, combustivel, tanque, marca);
 				break;
 			case Elétrico:
 				var tomadas = TipoDeTomada.values();
@@ -253,11 +276,11 @@ public class MenuFuncionario implements IMenu{
 				System.out.println("Bateria:");
 				var bateria = scanner.nextInt();
 				carro = new CarroEletrico(nome, diaria, placa, modelo,
-						automatico == 0 ? false : true, tomada, bateria);
+						automatico == 0 ? false : true, tomada, bateria,marca);
 				break;
 			default: // *
 				carro = new CarroHibrido(nome, diaria, placa, modelo,
-						automatico == 0 ? false : true);
+						automatico == 0 ? false : true,marca);
 				break;
 			}
 			System.out.println("Confirma as informações? (0 - Não/ 1 - Sim)");
@@ -342,18 +365,28 @@ public class MenuFuncionario implements IMenu{
 		for(int i = 0; i < lista.size(); i++) System.out.println(lista.get(i).getName() +
 				" - " + lista.get(i).getCPF());
 	}
+	private void ListarClientes() {
+		var lista = locadora.reposClientes.Listar();
+		System.out.println("Clientes:");
+		for(int i = 0; i < lista.size(); i++) System.out.println(lista.get(i).getName() +
+				" - " + lista.get(i).getCPF());
+	}
 	
 	private void HistoricoLocacoes() {
 		var lista = locadora.reposAlugueis.ListarDevolvidos();
+		if(lista.size() == 0) {
+			System.out.println("Não há devoluções registradas");
+		} else {
 		System.out.println("Histórico de locações:");
 		for(int i = 0; i < lista.size(); i++) {
 			var aluguel = lista.get(i);
 			System.out.println(aluguel.getID() + " - " + aluguel.getCarro().getName() +
 					" - " + aluguel.getCliente().getName());
+			}
 		}
 	}
 	
-	private void ListarCarros() { // Tentar ordenar por nome
+	private void ListarCarros() { 
 		var lista = locadora.reposCarros.Listar();
 		System.out.println("Carros:");
 		for(int i = 0; i < lista.size(); i++) {

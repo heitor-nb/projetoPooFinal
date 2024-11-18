@@ -9,8 +9,8 @@ public class CarroHibrido extends Carro{
 	private TipoDeTomada tomada;
 	private int bateria;
 	
-	public CarroHibrido(String name,Double value,String placa,String modelo,Boolean automatico) {
-		super(name,value,placa,modelo,automatico);
+	public CarroHibrido(String name,Double value,String placa,String modelo,Boolean automatico,String marca) {
+		super(name,value,placa,modelo,automatico,marca);
 		this.tipo = TipoDeCarro.Híbrido;
 	}
 

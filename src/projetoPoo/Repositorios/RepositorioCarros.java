@@ -49,7 +49,7 @@ public class RepositorioCarros implements IRepositorioCarros{
 	@Override
 	public Carro RecuperarPlaca(String placa) {
 		var index = Indice(placa);
-		return index > -1 ? lista.get(index) : null; // *
+		return index > -1 ? lista.get(index) : null; // 
 	}
 
 	@Override
@@ -59,11 +59,10 @@ public class RepositorioCarros implements IRepositorioCarros{
 			var aux = lista.get(index);
 			aux.setName(carro.getName());
 			aux.setValue(carro.getValue());
-			// aux.setPlaca(carro.getPlaca());
 			aux.setModelo(carro.getModelo());
 			aux.setAutomatico(carro.getAutomatico());
+			aux.setMarca(carro.getMarca());
 		}
-		// else System.out.println("Não encontrado");
 	}
 
 	@Override

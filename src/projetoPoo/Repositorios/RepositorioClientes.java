@@ -26,7 +26,7 @@ public class RepositorioClientes implements IRepositorioClientes {
 
 	@Override
 	public void Adicionar(Cliente cliente) {
-		var index = Indice(cliente.getCPF()); // Fazer essa verificacao em repos carros
+		var index = Indice(cliente.getCPF()); 
 		if(index == -1) lista.add(cliente);
 	}
 

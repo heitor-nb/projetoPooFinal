@@ -8,8 +8,8 @@ public class CarroCombustao extends Carro {
 	private TipoDeCombustivel combustivel;
 	private int tanque;
 	
-	public CarroCombustao(String name,Double value,String placa,String modelo,Boolean automatico,TipoDeCombustivel combustivel,int tanque) {
-		super(name,value,placa,modelo,automatico);
+	public CarroCombustao(String name,Double value,String placa,String modelo,Boolean automatico,TipoDeCombustivel combustivel,int tanque,String marca) {
+		super(name,value,placa,modelo,automatico,marca);
 		this.tipo = TipoDeCarro.Combustao;
 		this.combustivel = combustivel;
 		this.tanque = tanque;
