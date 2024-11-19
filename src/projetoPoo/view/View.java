@@ -6,4 +6,8 @@ public class View {
 				+ "\n4 - Adicionar funcionário\n5 - Ver saldo\n6 - Cadastrar cliente"
 				+ "\n7 - Lista de funcionários\n8 - Histórico de vendas\n9 - Ver frota\n10 - listar clientes\n0 - Sair");
 	}
+	
+	public static void MenuCliente() {
+		System.out.println("1 - Visualizar locações\n0 - Sair");
+	}
 }

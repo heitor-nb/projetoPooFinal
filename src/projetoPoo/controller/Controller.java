@@ -8,21 +8,27 @@ public class Controller{
 
 	private Locadora locadora;
 	private MenuFuncionario menuFuncionario;
+	private MenuCliente menuCliente;
 	
 	public Controller(Locadora locadora) {
 		this.locadora = locadora;
 		menuFuncionario = new MenuFuncionario(locadora);
+		menuCliente = new MenuCliente(locadora);
 	}
 	
 	public void MenuInicial() { 
 		try {
-			System.out.println("Locadora do tigrinho.\n");
+			System.out.println("Locadora do tigrinho.\n"
+					+ "2 - Cliente / 1 - Funcionário / 0 - Sair");
 			var scanner = new Scanner(System.in);
-			System.out.println("1 - Login / 0 - Sair");
-			int opcao;
-			do opcao = scanner.nextInt();
-			while(opcao < 0 || opcao > 1);
-			if(opcao != 0) Login(scanner);
+			int menu;
+			do menu = scanner.nextInt();
+			while(menu < 0 || menu > 2);
+			if(menu == 2 && locadora.reposClientes.Listar().size() == 0) {
+				System.out.println("Nenhum cliente cadastrado.\nRetornando...");
+				MenuInicial();
+			}
+			if(menu != 0) Login(scanner, menu);
 		}
 		catch(Exception ex) {
 			System.out.println("Erro: " + ex.getMessage());
@@ -30,20 +36,35 @@ public class Controller{
 		}
 	}
 	
-	private void Login(Scanner scanner) {
+	private void Login(Scanner scanner, int menu) {
 		System.out.println("Nome:");
 		var nome = scanner.next();
-		var funcionario = locadora.reposFuncionarios.ProcurarPorNome(nome);
-		if(funcionario != null) {
-			System.out.println("Bem-vindo(a) " + nome + "\nSenha:");
-			var senha = scanner.next();
-			if(senha.equals(funcionario.getSenha())) menuFuncionario.Executar(funcionario);
-			else System.out.println("Senha incorreta.");
+		if(menu == 1) {
+			var funcionario = locadora.reposFuncionarios.ProcurarPorNome(nome);
+			if(funcionario != null) {
+				System.out.println("Bem-vindo(a) " + nome + "\nSenha:");
+				var senha = scanner.next();
+				if(senha.equals(funcionario.getSenha())) menuFuncionario.Executar(funcionario);
+				else System.out.println("Senha incorreta.");
+			}
+			else {
+				System.out.println("Nome não encontrado.");
+			}
+			MenuInicial();
 		}
 		else {
-			System.out.println("Nome não encontrado.");
+			var cliente = locadora.reposClientes.ProcurarPorNome(nome);
+			if(cliente != null) {
+				System.out.println("Bem-vindo(a) " + nome + "\nCPF:");
+				var cpf = scanner.next();
+				if(cpf.equals(cliente.getCPF())) menuCliente.Executar(cliente);
+				else System.out.println("Senha incorreta.");
+			}
+			else {
+				System.out.println("Nome não encontrado.");
+			}
+			MenuInicial();
 		}
-		MenuInicial();
 	}
 	
 }

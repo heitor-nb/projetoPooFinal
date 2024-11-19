@@ -2,7 +2,6 @@ package projetoPoo.controller;
 
 import java.util.Scanner;
 
-import projetoPoo.Interfaces.IMenu;
 import projetoPoo.enums.TipoDeCarro;
 import projetoPoo.enums.TipoDeCombustivel;
 import projetoPoo.enums.TipoDeTomada;
@@ -16,7 +15,7 @@ import projetoPoo.modelos.Funcionario;
 import projetoPoo.modelos.Locadora;
 import projetoPoo.view.View;
 
-public class MenuFuncionario implements IMenu{
+public class MenuFuncionario{
 
 	private Locadora locadora;
 	
@@ -24,7 +23,6 @@ public class MenuFuncionario implements IMenu{
 		this.locadora = locadora;
 	}
 	
-	@Override
 	public void Executar(Funcionario funcionario) {
 		View.MenuFuncionario();
 		int option = -1;
@@ -79,8 +77,6 @@ public class MenuFuncionario implements IMenu{
 	}
 	
 	private void RegistrarLocacao(Funcionario funcionario) {
-		
-		
 		var tipos = TipoDeCarro.values();
 		var scanner = new Scanner(System.in);
 		System.out.println("----- Tipo de carro -----");
@@ -102,7 +98,7 @@ public class MenuFuncionario implements IMenu{
 		
 		if(lista.size() == 0) {
 			System.out.println("Nenhum carro disponivel.");
-			System.out.println("Redirecionando para tela principal...\n(press enter)");
+			System.out.println("Redirecionando para tela principal...");
 			scanner.nextLine();
 			return;
 		}
@@ -128,7 +124,7 @@ public class MenuFuncionario implements IMenu{
 		carro.ExibirDetalhes();
 		if(locadora.reposClientes.Listar().size() == 0) {
 			System.out.println("Nenhum Cliente cadastrado.");
-			System.out.println("Redirecionando para tela de cadastro...\n(press enter)");
+			System.out.println("Redirecionando para tela de cadastro...");
 			scanner.nextLine();
 			CadastrarCliente();
 		}
@@ -137,7 +133,7 @@ public class MenuFuncionario implements IMenu{
 		Cliente cliente = null;
 		
 		try {
-			var cpf = scanner.next(); // *
+			var cpf = scanner.next();
 			cliente = locadora.reposClientes.procurarPorCPF(cpf);
 		}
 		catch(Exception ex) {
@@ -146,7 +142,7 @@ public class MenuFuncionario implements IMenu{
 		}
 		if(cliente == null) {
 			System.out.println("Cliente não cadastrado.");
-			System.out.println("Redirecionando para tela de cadastro...\n(press enter)");
+			System.out.println("Redirecionando para tela de cadastro...");
 			scanner.nextLine();
 			CadastrarCliente();
 		}
@@ -193,7 +189,7 @@ public class MenuFuncionario implements IMenu{
 		var scanner = new Scanner(System.in);
 		String placa;
 		try {
-			placa = scanner.next(); // *
+			placa = scanner.next();
 		}
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());

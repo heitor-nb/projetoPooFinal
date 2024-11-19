@@ -50,6 +50,14 @@ public class RepositorioAluguel implements IRepositorioAluguel{
 		}
 		return aux;
 	}
+	
+	public ArrayList<Aluguel> ListarPorCliente(String cpf){
+		var aux = new ArrayList<Aluguel>();
+		for(int i = 0; i < lista.size(); i++) {
+			if(lista.get(i).getCliente().getCPF().equals(cpf)) aux.add(lista.get(i));
+		}
+		return aux;
+	}
 
 	@Override
 	public Aluguel procurarPorId(String id) {
